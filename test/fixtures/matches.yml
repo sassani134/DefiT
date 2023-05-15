@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  team1: MyString
+  kr1: 1
+  km1: 1
+  team2: MyString
+  kr2: 1
+  km2: 1
+  tournament: one
+  victory: MyString
+
+two:
+  name: MyString
+  team1: MyString
+  kr1: 1
+  km1: 1
+  team2: MyString
+  kr2: 1
+  km2: 1
+  tournament: two
+  victory: MyString
