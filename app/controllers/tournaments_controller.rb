@@ -1,6 +1,7 @@
 class TournamentsController < ApplicationController
   require 'faker'
-  before_action :set_tournament, only: %i[ show edit update destroy classement]
+  require 'byebug'
+  before_action :set_tournament, only: %i[ show edit update destroy]
 
   def index
     @tournaments = Tournament.all
@@ -123,7 +124,9 @@ class TournamentsController < ApplicationController
 
   #Le résultat des matchs est afficher correctement (Voir Tableau ci-dessus pour la méthode de calcul)
   def classement
-    @tournament = Tournament.find(params[:id])
+    #byebug
+    @tournament = Tournament.find(params[:tournament_id])
+
     @teams = @tournament.teams
     @matches = @tournament.matches
 
@@ -132,7 +135,7 @@ class TournamentsController < ApplicationController
         if match.victory == team.name
           @team_point += 3
         elsif match.victory == "Egalité"
-          @team_point+"#{team.name}" += 1
+          @team_point += 1
         end
         if match.team1 == team.name
           @team_kr += match.kr1
@@ -141,7 +144,7 @@ class TournamentsController < ApplicationController
           @team_kr += match.kr2
           @team_kl += match.km2
         end
-        instance_variables("@#{team.name}", {team: team.name, point: @team_point, kr: @team_kr, km: @team_km})
+        @t_class +=  {team: team.name, point: @team_point, kr: @team_kr, km: @team_km}
       end
     end
   end

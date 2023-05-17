@@ -1,0 +1,45 @@
+<h1 class="bg-red-50 text-red-500"> Classment </h1>
+
+
+<% if @matches.nil? || @teams.first.nil? %>
+  <h2><p> Pas de match valide </p></h2>
+<%else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Equipe</th>
+        <th>Points</th>
+        <th>kill recu</th>
+        <th>kill marqués</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <% @teams.each do |team| %>
+              <% @matches.each do |match| %>
+                <% if match.victory == team.name %>
+                  <% @tmp += 3 %>
+                <% elsif match.victory == "Egalité" %>
+                  <% @tmp += 1 %>
+                <% end %>
+                <% if match.team == team.name %>
+                  <% @tkr += match.kr1 %>
+                  <% @tkm += match.km1 %>
+                <% elsif match.team2 == team.name %>
+                  <% @tkr += match.kr2 %>
+                  <% @tkm += match.km2 %>
+                <% end %>
+            <% end %>
+            <td><%= team.name %></td>
+            <td><%= @tmp %> </td>
+            <td><%= @tkr %></td>
+            <td><%= @tkm %></td>
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+  <% end %>
+<br/>
+<p>
+</p>
+
